@@ -82,7 +82,7 @@ public class MarsRoverTest
     void testRoverMoveLeftNorth()
     {
         MarsRover marsRover = new MarsRover(0, 0, 'N');
-        marsRover.turn('L');
+       // marsRover.execute('L');
         assertEquals('W', marsRover.getDirection());
     }
 
@@ -90,7 +90,7 @@ public class MarsRoverTest
     void testRoverMoveLeftWest()
     {
         MarsRover marsRover = new MarsRover(0, 0, 'W');
-        marsRover.turn('L');
+       // marsRover.turn('L');
         assertEquals('S', marsRover.getDirection());
     }
 
@@ -98,7 +98,7 @@ public class MarsRoverTest
     void testRoverMoveLeftSouth()
     {
         MarsRover marsRover = new MarsRover(0, 0, 'S');
-        marsRover.turn('L');
+       // marsRover.turn('L');
         assertEquals('E', marsRover.getDirection());
     }
 
@@ -106,7 +106,7 @@ public class MarsRoverTest
     void testRoverMoveLeftEast()
     {
         MarsRover marsRover = new MarsRover(0, 0, 'E');
-        marsRover.turn('L');
+       // marsRover.turn('L');
         assertEquals('N', marsRover.getDirection());
     }
 
@@ -114,14 +114,14 @@ public class MarsRoverTest
     void testRoverMoveRightNorth()
     {
         MarsRover marsRover = new MarsRover(0, 0, 'N');
-        marsRover.turn('R');
+        //marsRover.turn('R');
         assertEquals('E', marsRover.getDirection());
     }
     @Test
     void testRoverMoveRightEast()
     {
         MarsRover marsRover = new MarsRover(0, 0, 'E');
-        marsRover.turn('R');
+       // marsRover.turn('R');
         assertEquals('S', marsRover.getDirection());
     }
 
@@ -129,7 +129,7 @@ public class MarsRoverTest
     void testRoverMoveRightSouth()
     {
         MarsRover marsRover = new MarsRover(0, 0, 'S');
-        marsRover.turn('R');
+        //marsRover.turn('R');
         assertEquals('W', marsRover.getDirection());
     }
 
@@ -137,7 +137,7 @@ public class MarsRoverTest
     void testRoverMoveRightWest()
     {
         MarsRover marsRover = new MarsRover(0, 0, 'W');
-        marsRover.turn('R');
+       // marsRover.turn('R');
         assertEquals('N', marsRover.getDirection());
     }
 

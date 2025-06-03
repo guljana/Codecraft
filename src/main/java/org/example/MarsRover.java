@@ -1,13 +1,10 @@
 package org.example;
 
-
-public class MarsRover
-{
+public class MarsRover {
 
     private int x;
     private int y;
     private Direction direction;
-    private Command command;
 
     public MarsRover(int x, int y, char direction) {
         this.x = x;
@@ -33,20 +30,17 @@ public class MarsRover
         }
     }
 
-    public void move(char dir) {
-        if (dir == 'F') {
-            moveForward();
-        } else if (dir == 'B') {
-            moveBackward();
+    public void execute(Command command) {
+        switch (command) {
+            case FORWARD: moveForward(); break;
+            case BACKWARD: moveBackward(); break;
+            case LEFT: direction = direction.turnLeft(); break;
+            case RIGHT: direction = direction.turnRight(); break;
         }
     }
 
-    public void turn(char turnDir) {
-        if (turnDir == 'L') {
-            direction = direction.turnLeft();
-        } else if (turnDir == 'R') {
-            direction = direction.turnRight();
-        }
+    public void move(char dir) {
+        execute(Command.fromChar(dir));
     }
 
     public int[] getPosition() {
@@ -57,6 +51,3 @@ public class MarsRover
         return direction.name().charAt(0);
     }
 }
-
-
-
