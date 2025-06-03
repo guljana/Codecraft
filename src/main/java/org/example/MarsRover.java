@@ -5,13 +5,9 @@ public class MarsRover {
 
     private int x;
     private int y;
-    private Character direction;
+    private char direction;
 
-    MarsRover(){
-        
-    }
-
-    public MarsRover(int x, int y, Character direction)
+    public MarsRover(int x, int y, char direction)
     {
         this.x = x;
         this.y = y;
@@ -84,7 +80,7 @@ public class MarsRover {
             }
         }
 
-    public void turn(Character turnDir)
+    public void turn(char turnDir)
     {
         switch (turnDir) {
             case 'L':
