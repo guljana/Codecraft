@@ -2,6 +2,10 @@ package org.example;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 public class CDWarehouseTest
 {
     @Test
@@ -17,7 +21,8 @@ public class CDWarehouseTest
         Warehouse warehouse = new Warehouse();
         CD cd = new CD("Thriller", "Michael Jackson");
         warehouse.addItem(cd, 5);
-        boolean result = warehouse.buyItem(cd, 2);
+        Chart chart = mock(Chart.class);
+        boolean result = warehouse.reduceStockOfItem(cd, 2, chart);
         assertTrue(result);
         assertEquals(3, warehouse.getStock(cd));
     }
@@ -27,7 +32,8 @@ public class CDWarehouseTest
         Warehouse warehouse = new Warehouse();
         CD cd = new CD("Thriller", "Michael Jackson");
         warehouse.addItem(cd, 1);
-        boolean result = warehouse.buyItem(cd, 2);
+        Chart chart = mock(Chart.class);
+        boolean result = warehouse.reduceStockOfItem(cd, 2, chart);
         assertFalse(result);
         assertEquals(1, warehouse.getStock(cd));
     }
@@ -37,7 +43,8 @@ public class CDWarehouseTest
     {
         Warehouse warehouse = new Warehouse();
         CD cd = new CD("Thriller", "Michael Jackson");
-        assertFalse(warehouse.buyItem(cd, 1));
+        Chart chart = mock(Chart.class);
+        assertFalse(warehouse.reduceStockOfItem(cd, 1, chart));
     }
 
         @Test
@@ -91,5 +98,29 @@ public class CDWarehouseTest
         assertEquals(2, cdWarehouse.getItems("The Wall","").size());
     }
 
+    @Test
+    public void notifyChartsWhenBuyItem() {
+        Warehouse warehouse = new Warehouse();
+        Chart chart = mock(Chart.class);
+        CD cd = new CD("Thriller", "Michael Jackson");
+        warehouse.addItem(cd, 5);
+        boolean result = warehouse.reduceStockOfItem(cd, 2, chart);
+        assertTrue(result);
+        assertEquals(3, warehouse.getStock(cd));
+        verify(chart).notifyChartUpdate("Michael Jackson","Thriller",2);
+    }
+
+    @Test
+    public void offerBestriceInCharts() {
+        Warehouse warehouse = new Warehouse();
+        Chart chart = mock(Chart.class);
+        when(chart.getChartPosition("Michael Jackson", "Thriller")).thenReturn(1);
+        CD cd = new CD("Thriller", "Michael Jackson");
+        warehouse.addItem(cd, 5);
+        boolean result = warehouse.reduceStockOfItem(cd, 2, chart);
+        assertTrue(result);
+        assertEquals(3, warehouse.getStock(cd));
+        verify(chart).notifyChartUpdate("Michael Jackson","Thriller",2);
+    }
 
 }

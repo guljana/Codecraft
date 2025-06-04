@@ -10,12 +10,13 @@ public class Warehouse
         stock.put(item, stock.getOrDefault(item, 0) + quantity);
     }
 
-    public boolean buyItem(Item item, int quantity) {
+    public boolean reduceStockOfItem(Item item, int quantity, Chart notifier) {
         Integer currentStock = stock.get(item);
         if (currentStock == null || currentStock < quantity) {
             return false;
         }
         stock.put(item, currentStock - quantity);
+        notifier.notifyChartUpdate(item.getArtist(), item.getTitle(), quantity);
         return true;
     }
 
@@ -36,6 +37,20 @@ public class Warehouse
         return result;
     }
 
+    public boolean purchase(Item item, int quantity, Customer customer, PaymentProcessor processor, double pricePerItem) {
+        int currentStock = stock.getOrDefault(item, 0);
+        if (currentStock < quantity) {
+            return false;
+        }
+
+        double totalPrice = pricePerItem * quantity;
+        if (processor.process(customer.getCardNumber(), totalPrice)) {
+            stock.put(item, currentStock - quantity);
+            return true;
+        }
+
+        return false;
+    }
 
 
 
