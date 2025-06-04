@@ -1,6 +1,6 @@
 package org.example;
 
-public class CD
+public class CD implements Item
 {
     private String title;
     private String artist;
@@ -10,10 +10,12 @@ public class CD
         this.artist = artist;
     }
 
+    @Override
     public String getTitle() {
         return title;
     }
 
+    @Override
     public String getArtist() {
         return artist;
     }
