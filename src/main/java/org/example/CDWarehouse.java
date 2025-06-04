@@ -1,49 +1,41 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class CDWarehouse
-{
-  private List<CD> cds= new ArrayList<>();
-  private Map<CD, Integer> stock = new HashMap<>();
+public class CDWarehouse {
+    private final Map<CD, Integer> stock = new HashMap<>();
 
-    public void addCD(String title, String artist, int quantity)
-    {
-        CD cd = new CD(title, artist);
+    public void addCD(CD cd, int quantity) {
         stock.put(cd, stock.getOrDefault(cd, 0) + quantity);
     }
-    public void addCDs(CD cd, int quantity)
-    {
-        stock.put(cd, stock.getOrDefault(cd, 0) + quantity);
-        cds.add(cd);
-    }
 
-    public int getStock(String title, String artist)
-    {
-        CD cd = new CD(title, artist);
-        return this.stock.get(cd);
-    }
-
-    public int getStock1(CD cd)
-    {
-        if (this.stock.containsKey(cd)) {
-            return this.stock.get(cd);
+    public boolean buyCD(CD cd, int quantity) {
+        Integer currentStock = stock.get(cd);
+        if (currentStock == null || currentStock < quantity) {
+            return false;
         }
-        return 0;
+        stock.put(cd, currentStock - quantity);
+        return true;
     }
 
 
-    public List<CD> getCds(String title, String artist)
-    {
-        List<CD> cds = new ArrayList<>();
-        for (CD cd : this.cds) {
-            if (cd.getTitle().equalsIgnoreCase(title) && cd.getArtist().equalsIgnoreCase(artist)) {
-                cds.add(cd);
+    public int getStock(CD cd) {
+        return stock.getOrDefault(cd, 0);
+    }
+
+    public List<CD> getCds(String title, String artist) {
+        List<CD> result = new ArrayList<>();
+        for (CD cd : stock.keySet()) {
+            boolean matchesTitle = (title == null || title.isBlank() || cd.getTitle().equalsIgnoreCase(title));
+            boolean matchesArtist = (artist == null || artist.isBlank() || cd.getArtist().equalsIgnoreCase(artist));
+            if (matchesTitle && matchesArtist) {
+                result.add(cd);
             }
         }
-        return cds;
+        return result;
     }
+
+
+
+
 }

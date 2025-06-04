@@ -4,142 +4,123 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MarsRoverTest
-{
+public class MarsRoverTest {
 
     @Test
-    void testRoverInitialPosition()
-    {
+    void testRoverInitialPosition() {
         MarsRover marsRover = new MarsRover(0, 0, 'N');
         assertArrayEquals(new int[]{0, 0}, marsRover.getPosition());
     }
 
     @Test
-    void testRoverMoveForwardNorth()
-    {
+    void testRoverMoveForwardNorth() {
         MarsRover marsRover = new MarsRover(0, 0, 'N');
         marsRover.move('F');
         assertArrayEquals(new int[]{0, 1}, marsRover.getPosition());
     }
 
     @Test
-    void testRoverMoveForwardSouth()
-    {
+    void testRoverMoveForwardSouth() {
         MarsRover marsRover = new MarsRover(0, 0, 'S');
         marsRover.move('F');
         assertArrayEquals(new int[]{0, -1}, marsRover.getPosition());
     }
 
     @Test
-    void testRoverMoveForwardEast()
-    {
+    void testRoverMoveForwardEast() {
         MarsRover marsRover = new MarsRover(0, 0, 'E');
         marsRover.move('F');
         assertArrayEquals(new int[]{1, 0}, marsRover.getPosition());
     }
 
     @Test
-    void testRoverMoveForwardWest()
-    {
+    void testRoverMoveForwardWest() {
         MarsRover marsRover = new MarsRover(0, 0, 'W');
         marsRover.move('F');
         assertArrayEquals(new int[]{-1, 0}, marsRover.getPosition());
     }
 
     @Test
-    void testRoverMoveBackwardNorth()
-    {
+    void testRoverMoveBackwardNorth() {
         MarsRover marsRover = new MarsRover(0, 0, 'N');
         marsRover.move('B');
         assertArrayEquals(new int[]{0, -1}, marsRover.getPosition());
     }
 
     @Test
-    void testRoverMoveBackwardWest()
-    {
-        MarsRover marsRover = new MarsRover(0, 0, 'W');
-        marsRover.move('B');
-        assertArrayEquals(new int[]{1, 0}, marsRover.getPosition());
-    }
-
-    @Test
-    void testRoverMoveBackwardEast()
-    {
-        MarsRover marsRover = new MarsRover(0, 0, 'E');
-        marsRover.move('B');
-        assertArrayEquals(new int[]{-1, 0}, marsRover.getPosition());
-    }
-
-    @Test
-    void testRoverMoveBackwardSouth()
-    {
+    void testRoverMoveBackwardSouth() {
         MarsRover marsRover = new MarsRover(0, 0, 'S');
         marsRover.move('B');
         assertArrayEquals(new int[]{0, 1}, marsRover.getPosition());
     }
 
     @Test
-    void testRoverMoveLeftNorth()
-    {
+    void testRoverMoveBackwardEast() {
+        MarsRover marsRover = new MarsRover(0, 0, 'E');
+        marsRover.move('B');
+        assertArrayEquals(new int[]{-1, 0}, marsRover.getPosition());
+    }
+
+    @Test
+    void testRoverMoveBackwardWest() {
+        MarsRover marsRover = new MarsRover(0, 0, 'W');
+        marsRover.move('B');
+        assertArrayEquals(new int[]{1, 0}, marsRover.getPosition());
+    }
+
+    @Test
+    void testRoverTurnLeftFromNorth() {
         MarsRover marsRover = new MarsRover(0, 0, 'N');
-       // marsRover.execute('L');
+        marsRover.move('L');
         assertEquals('W', marsRover.getDirection());
     }
 
     @Test
-    void testRoverMoveLeftWest()
-    {
+    void testRoverTurnLeftFromWest() {
         MarsRover marsRover = new MarsRover(0, 0, 'W');
-       // marsRover.turn('L');
+        marsRover.move('L');
         assertEquals('S', marsRover.getDirection());
     }
 
     @Test
-    void testRoverMoveLeftSouth()
-    {
+    void testRoverTurnLeftFromSouth() {
         MarsRover marsRover = new MarsRover(0, 0, 'S');
-       // marsRover.turn('L');
+        marsRover.move('L');
         assertEquals('E', marsRover.getDirection());
     }
 
     @Test
-    void testRoverMoveLeftEast()
-    {
+    void testRoverTurnLeftFromEast() {
         MarsRover marsRover = new MarsRover(0, 0, 'E');
-       // marsRover.turn('L');
+        marsRover.move('L');
         assertEquals('N', marsRover.getDirection());
     }
 
     @Test
-    void testRoverMoveRightNorth()
-    {
+    void testRoverTurnRightFromNorth() {
         MarsRover marsRover = new MarsRover(0, 0, 'N');
-        //marsRover.turn('R');
+        marsRover.move('R');
         assertEquals('E', marsRover.getDirection());
     }
+
     @Test
-    void testRoverMoveRightEast()
-    {
+    void testRoverTurnRightFromEast() {
         MarsRover marsRover = new MarsRover(0, 0, 'E');
-       // marsRover.turn('R');
+        marsRover.move('R');
         assertEquals('S', marsRover.getDirection());
     }
 
     @Test
-    void testRoverMoveRightSouth()
-    {
+    void testRoverTurnRightFromSouth() {
         MarsRover marsRover = new MarsRover(0, 0, 'S');
-        //marsRover.turn('R');
+        marsRover.move('R');
         assertEquals('W', marsRover.getDirection());
     }
 
     @Test
-    void testRoverMoveRightWest()
-    {
+    void testRoverTurnRightFromWest() {
         MarsRover marsRover = new MarsRover(0, 0, 'W');
-       // marsRover.turn('R');
+        marsRover.move('R');
         assertEquals('N', marsRover.getDirection());
     }
-
 }
-
